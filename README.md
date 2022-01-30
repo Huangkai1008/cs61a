@@ -1,4 +1,4 @@
-# CS61A Fall 2020
+# CS61A
 
 The solutions to the labs, homeworks and projects auditing the CS61a.
 
