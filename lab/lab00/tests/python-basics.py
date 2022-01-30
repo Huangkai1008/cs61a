@@ -1,11 +1,11 @@
 test = {
-  'name': 'Python Basics',
-  'points': 0,
-  'suites': [
-    {
-      'cases': [
+    "name": "Python Basics",
+    "points": 0,
+    "suites": [
         {
-          'code': r"""
+            "cases": [
+                {
+                    "code": r"""
           >>> 10 + 2
           4d9a9f010a771e1434934b7e874ade0f
           # locked
@@ -19,18 +19,18 @@ test = {
           6f717e91fe5a90641e44dc5a5368b663
           # locked
           """,
-          'hidden': False,
-          'locked': True,
-          'multiline': False
-        }
-      ],
-      'scored': False,
-      'type': 'wwpp'
-    },
-    {
-      'cases': [
+                    "hidden": False,
+                    "locked": True,
+                    "multiline": False,
+                }
+            ],
+            "scored": False,
+            "type": "wwpp",
+        },
         {
-          'code': r"""
+            "cases": [
+                {
+                    "code": r"""
           >>> x = 20
           >>> x + 2
           3d3ab69a0677d75a0ef4a99e0d2d1451
@@ -48,13 +48,13 @@ test = {
           3d3ab69a0677d75a0ef4a99e0d2d1451
           # locked
           """,
-          'hidden': False,
-          'locked': True,
-          'multiline': False
-        }
-      ],
-      'scored': False,
-      'type': 'wwpp'
-    }
-  ]
+                    "hidden": False,
+                    "locked": True,
+                    "multiline": False,
+                }
+            ],
+            "scored": False,
+            "type": "wwpp",
+        },
+    ],
 }
