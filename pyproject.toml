@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "cs61a-fall2020"
+version = "0.1.0"
+description = "The solutions to the labs, homeworks and projects auditing the CS61a."
+authors = ["huangkai <h1770360848@outlook.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
