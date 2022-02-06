@@ -118,7 +118,10 @@ def missing_digits(n):
     >>> check(HW_SOURCE_FILE, 'missing_digits', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    if n // 10 == 0:
+        return 0
+
+    return missing_digits(n // 10) + max(n % 10 - n // 10 % 10 - 1, 0)
 
 
 def ascending_coin(coin):
