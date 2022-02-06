@@ -177,7 +177,20 @@ def count_coins(change):
     >>> check(HW_SOURCE_FILE, 'count_coins', ['While', 'For'])
     True
     """
-    "*** YOUR CODE HERE ***"
+    return count_coins_with_partitions(change, 25)
+
+
+def count_coins_with_partitions(change: int, limit: int) -> int:
+    if change == 0:
+        return 1
+    elif change < 0:
+        return 0
+    elif limit is None:
+        return 0
+    else:
+        with_limit = count_coins_with_partitions(change - limit, limit)
+        without_limit = count_coins_with_partitions(change, descending_coin(limit))
+        return with_limit + without_limit
 
 
 def print_move(origin, destination):
