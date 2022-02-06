@@ -66,7 +66,7 @@ def pingpong(n):
     if n == 1:
         return 1
 
-    return pingpong(n - 1) + direction(n - 1)
+    return pingpong(n - 1) + direction(n)
 
 
 def direction(n: int):
@@ -75,17 +75,17 @@ def direction(n: int):
     >>> direction(2)
     1
     >>> direction(8)
-    -1
+    1
     >>> direction(9)
     -1
     >>> direction(16)
-    1
-    >>> direction(18)
     -1
+    >>> direction(18)
+    1
     """
     if n == 1:
         return 1
-    elif num_eights(n) or n % 8 == 0:
+    elif num_eights(n - 1) or (n - 1) % 8 == 0:
         return -direction(n - 1)
     else:
         return direction(n - 1)
