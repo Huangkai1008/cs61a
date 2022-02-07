@@ -36,8 +36,57 @@ def picky_piggy(score):
     score:  The opponent's current score.
     """
     # BEGIN PROBLEM 2
-    "*** YOUR CODE HERE ***"
+    return number_digit(142857, score) if score > 0 else 7
     # END PROBLEM 2
+
+
+def number_digit(number: int, digit: int) -> int:
+    """Return the digit of a number.
+
+    Args:
+        number: the given number
+        digit: the given digit
+
+    >>> number_digit(142857, 3)
+    2
+    >>> number_digit(142857, 14)
+    4
+    >>> number_digit(142857, 1)
+    1
+    >>> number_digit(142857, 24)
+    7
+    """
+
+    assert isinstance(number, int) and isinstance(digit, int), 'number and digit must be integers'
+    assert number > 0 and digit > 0, 'number and digit must greater than 0'
+
+    length = number_length(number)
+    digit = digit % length or length
+    for _ in range(length - digit):
+        number = number // 10
+    return number % 10
+
+
+def number_length(number: int) -> int:
+    """Return the length of a number.
+
+    Args:
+        number: the given number
+
+    >>> number_length(9)
+    1
+    >>> number_length(125)
+    3
+    >>> number_length(142857)
+    6
+    """
+    assert isinstance(number, int), 'number must be a integer'
+
+    k = 0
+    while number:
+        number //= 10
+        k += 1
+    return k
 
 
 def take_turn(num_rolls, opponent_score, dice=six_sided, goal=GOAL_SCORE):
