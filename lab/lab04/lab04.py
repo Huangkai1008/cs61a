@@ -27,7 +27,7 @@ def summation(n, term):
 
 
 def pascal(row, column):
-    """Returns the value of the item in Pascal's Triangle 
+    """Returns the value of the item in Pascal's Triangle
     whose position is specified by row and column.
     >>> pascal(0, 0)
     1
@@ -89,8 +89,7 @@ def coords(fn, seq, lower, upper):
     >>> coords(fn, seq, 1, 9)
     [[-2, 4], [1, 1], [3, 9]]
     """
-    "*** YOUR CODE HERE ***"
-    return ______
+    return [[x, fn(x)] for x in seq if lower <= fn(x) <= upper]
 
 
 def riffle(deck):
@@ -102,5 +101,7 @@ def riffle(deck):
     >>> riffle(range(20))
     [0, 10, 1, 11, 2, 12, 3, 13, 4, 14, 5, 15, 6, 16, 7, 17, 8, 18, 9, 19]
     """
-    "*** YOUR CODE HERE ***"
-    return _______
+    return [
+        deck[i // 2] if i % 2 == 0 else deck[(len(deck) + i) // 2]
+        for i in range(len(deck))
+    ]
