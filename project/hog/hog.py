@@ -1,4 +1,5 @@
 """CS 61A Presents The Game of Hog."""
+from typing import Callable
 
 from dice import six_sided, four_sided, make_test_dice
 from ucb import main, trace, interact
@@ -57,7 +58,9 @@ def number_digit(number: int, digit: int) -> int:
     7
     """
 
-    assert isinstance(number, int) and isinstance(digit, int), 'number and digit must be integers'
+    assert isinstance(number, int) and isinstance(
+        digit, int
+    ), 'number and digit must be integers'
     assert number > 0 and digit > 0, 'number and digit must greater than 0'
 
     length = number_length(number)
@@ -136,8 +139,15 @@ def silence(score0, score1):
     return silence
 
 
-def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
-         goal=GOAL_SCORE, say=silence):
+def play(
+    strategy0,
+    strategy1,
+    score0=0,
+    score1=0,
+    dice=six_sided,
+    goal=GOAL_SCORE,
+    say=silence,
+):
     """Simulate a game and return the final scores of both players, with Player
     0's score first, and Player 1's score second.
 
@@ -155,13 +165,44 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     """
     who = 0  # Who is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+    while score0 < goal and score1 < goal:
+        if who == 0:
+            # player0's turn
+            score0 = play_turn(strategy0, score0, score1, dice, goal)
+        else:
+            # player1's turn
+            score1 = play_turn(strategy1, score1, score0, dice, goal)
+
+        who = next_player(who)
+
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
     "*** YOUR CODE HERE ***"
     # END PROBLEM 6
     return score0, score1
+
+
+def play_turn(
+    strategy: Callable,
+    player_score: int,
+    opponent_score: int,
+    dice: Callable,
+    goal: int,
+) -> int:
+    """Return the player score after the turn.
+
+    Args:
+        strategy: player's roll strategy
+        player_score: player's score
+        opponent_score: opponent's score
+        dice: dice function
+        goal: the goal score
+    """
+    player_score += take_turn(
+        strategy(player_score, opponent_score), opponent_score, dice, goal
+    )
+    return player_score + hog_pile(player_score, opponent_score)
 
 
 #######################
@@ -374,11 +415,19 @@ def final_strategy(score, opponent_score):
 def run(*args):
     """Read in the command-line argument and calls corresponding functions."""
     import argparse
+
     parser = argparse.ArgumentParser(description="Play Hog")
-    parser.add_argument('--run_experiments', '-r', action='store_true',
-                        help='Runs strategy experiments')
+    parser.add_argument(
+        '--run_experiments', '-r', action='store_true', help='Runs strategy experiments'
+    )
 
     args = parser.parse_args()
 
     if args.run_experiments:
         run_experiments()
+
+
+if __name__ == '__main__':
+    always = always_roll
+    always_three = make_test_dice(3)
+    s0, s1 = play(always(3), always(3), goal=15, dice=always_three)
