@@ -116,7 +116,7 @@ def hog_pile(player_score, opponent_score):
     opponent_score: The total score of the other player.
     """
     # BEGIN PROBLEM 4
-    "*** YOUR CODE HERE ***"
+    return player_score if player_score == opponent_score else 0
     # END PROBLEM 4
 
 
