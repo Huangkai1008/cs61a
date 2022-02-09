@@ -140,13 +140,13 @@ def silence(score0, score1):
 
 
 def play(
-    strategy0,
-    strategy1,
-    score0=0,
-    score1=0,
-    dice=six_sided,
-    goal=GOAL_SCORE,
-    say=silence,
+        strategy0,
+        strategy1,
+        score0=0,
+        score1=0,
+        dice=six_sided,
+        goal=GOAL_SCORE,
+        say=silence,
 ):
     """Simulate a game and return the final scores of both players, with Player
     0's score first, and Player 1's score second.
@@ -187,11 +187,11 @@ def play(
 
 
 def play_turn(
-    strategy: Callable,
-    player_score: int,
-    opponent_score: int,
-    dice: Callable,
-    goal: int,
+        strategy: Callable,
+        player_score: int,
+        opponent_score: int,
+        dice: Callable,
+        goal: int,
 ) -> int:
     """Return the player score after the turn.
 
@@ -284,8 +284,16 @@ def announce_highest(who, last_score=0, running_high=0):
     30 point(s)! That's a record gain for Player 1!
     """
     assert who == 0 or who == 1, 'The who argument should indicate a player.'
+
     # BEGIN PROBLEM 7
-    "*** YOUR CODE HERE ***"
+    def say(score0, score1):
+        score = score0 if who == 0 else score1
+        gain = score - last_score
+        if gain > running_high:
+            print(f"{gain} point(s)! That's a record gain for Player {who}!")
+        return announce_highest(who, score, max(gain, running_high))
+
+    return say
     # END PROBLEM 7
 
 
