@@ -402,7 +402,7 @@ def picky_piggy_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     returns NUM_ROLLS otherwise.
     """
     # BEGIN PROBLEM 10
-    return 6  # Remove this line once implemented.
+    return 0 if picky_piggy(opponent_score) >= cutoff else num_rolls
     # END PROBLEM 10
 
 
