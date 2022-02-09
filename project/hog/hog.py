@@ -427,10 +427,16 @@ def hog_pile_strategy(score, opponent_score, cutoff=8, num_rolls=6):
 def final_strategy(score, opponent_score):
     """Write a brief description of your final strategy.
 
-    *** YOUR DESCRIPTION HERE ***
+    We use `hog_pile_strategy` to implement our final strategy.
+    We assume the avg point of every dice is 3 or 4, because of the `sow sad` rule,
+    choose as few rolls as possible.
     """
     # BEGIN PROBLEM 12
-    return 6  # Remove this line once implemented.
+    diff_score = GOAL_SCORE - score
+    assume_point = 4
+    return hog_pile_strategy(
+        score, opponent_score, cutoff=diff_score, num_rolls=diff_score // assume_point
+    )
     # END PROBLEM 12
 
 
