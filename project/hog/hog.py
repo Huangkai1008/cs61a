@@ -173,6 +173,9 @@ def play(
             # player1's turn
             score1 = play_turn(strategy1, score1, score0, dice, goal)
 
+        # comment
+        say = say(score0, score1)
+        # get next player
         who = next_player(who)
 
     # END PROBLEM 5
@@ -237,7 +240,7 @@ def announce_lead_changes(last_leader=None):
             leader = 1
         else:
             leader = None
-        if leader != None and leader != last_leader:
+        if leader is not None and leader != last_leader:
             print('Player', leader, 'takes the lead by', abs(score0 - score1))
         return announce_lead_changes(leader)
 
