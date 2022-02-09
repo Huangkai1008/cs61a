@@ -412,7 +412,15 @@ def hog_pile_strategy(score, opponent_score, cutoff=8, num_rolls=6):
     Otherwise, it returns NUM_ROLLS.
     """
     # BEGIN PROBLEM 11
-    return 6  # Remove this line once implemented.
+    if any(
+        [
+            picky_piggy_strategy(score, opponent_score, cutoff, num_rolls) == 0,
+            hog_pile(picky_piggy(opponent_score) + score, opponent_score) >= cutoff,
+        ]
+    ):
+        return 0
+
+    return num_rolls
     # END PROBLEM 11
 
 
