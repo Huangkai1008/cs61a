@@ -381,3 +381,22 @@ def copy_tree(t):
     5
     """
     return tree(label(t), [copy_tree(b) for b in branches(t)])
+
+
+def height(t):
+    """Return the height of a tree.
+
+    >>> t = tree(3)
+    >>> height(t)
+    0
+    >>> t = tree(3, [tree(5, [tree(1)]), tree(2)])
+    >>> height(t)
+    2
+    >>> t = tree(3, [tree(1), tree(2, [tree(5, [tree(6)]), tree(1)])])
+    >>> height(t)
+    3
+    """
+    if is_leaf(t):
+        return 0
+
+    return max([height(branch) for branch in branches(t)]) + 1
