@@ -198,7 +198,13 @@ def replace_loki_at_leaf(t, lokis_replacement):
     >>> laerad == yggdrasil # Make sure original tree is unmodified
     True
     """
-    "*** YOUR CODE HERE ***"
+    if is_leaf(t) and label(t) == 'loki':
+        return tree(lokis_replacement)
+
+    return tree(
+        label(t),
+        [replace_loki_at_leaf(branch, lokis_replacement) for branch in branches(t)],
+    )
 
 
 def has_path(t, word):
@@ -232,12 +238,24 @@ def has_path(t, word):
     False
     """
     assert len(word) > 0, 'no path for empty word.'
-    "*** YOUR CODE HERE ***"
+
+    if len(word) == 1:
+        return label(t) == word
+
+    if word[0] != label(t):
+        return False
+
+    for branch in branches(t):
+        if has_path(branch, word[1:]):
+            return True
+    return False
 
 
 def preorder(t):
     """Return a list of the entries in this tree in the order that they
     would be visited by a preorder traversal (see problem description).
+
+    PreOrder: root -> left -> right
 
     >>> numbers = tree(1, [tree(2), tree(3, [tree(4), tree(5)]), tree(6, [tree(7)])])
     >>> preorder(numbers)
@@ -245,7 +263,11 @@ def preorder(t):
     >>> preorder(tree(2, [tree(4, [tree(6)])]))
     [2, 4, 6]
     """
-    "*** YOUR CODE HERE ***"
+    paths = list()
+    paths.append(label(t))
+    for branch in branches(t):
+        paths.extend(preorder(branch))
+    return paths
 
 
 def str_interval(x):
